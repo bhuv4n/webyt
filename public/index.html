@@ -2,39 +2,35 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Bhuvan Patel - YTDL</title>
+    <title>Bhuvan's YouTube</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 </head>
 <body>
 
-<h1>Stream and SaveAs the video</h1>
+<h1>Stream YouTube with ZERO advertisements.</h1>
 
 <form>
     <input type="text" placeholder="Enter YouTube video link here.." size="80" id="txt_url">
-    <input type="button" id="btn_fetch" value="Fetch">
+    <input type="button" id="btn_fetch" value="STREAM">
 </form><br>
-<a href="" download>DOWNLOAD VIDEO</a><br>
+<a href="" download>DOWNLOAD</a><br>
 
 <video width="500" height="375" controls>
     <source src="" type="video/mp4"/>
     <em>Sorry, your browser doesn't support HTML5 video.</em>
-</video>
+</video><br><br>
+<p style="color: green;">Creatively developed / managed / hosted by Bhuvan Patel.</p>
 
 <script>
     $(function () {
         $("#btn_fetch").click(function () {
-
             var url = $("#txt_url").val();
-
             var oThis = $(this);
             oThis.attr('disabled', true);
 
             $.get('video_info.php', {url: url}, function (data) {
-
                 console.log(data);
-
                 oThis.attr('disabled', false);
-
                 var links = data['links'];
                 var error = data['error'];
 
@@ -42,7 +38,6 @@
                     alert('Error: ' + error);
                     return;
                 }
-
                 // first link with video
                 var first = links[0];
 
@@ -52,7 +47,6 @@
                 }
 
                 var stream_url = 'stream.php?url=' + encodeURIComponent(first);
-
                 var video = $("video");
                 video.attr('src', stream_url);
                 video[0].load();
@@ -61,9 +55,7 @@
                 a.attr('href', stream_url);
                 a[0].load();
             });
-
         });
-
     });
 </script>
 </body>
